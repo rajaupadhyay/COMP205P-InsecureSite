@@ -10,6 +10,6 @@
 	if(!$result){
 		die("Could not perform the query: " . mysql_error());
 	}
-	header('Location: http://localhost/SW4/snips.php?tempId='. $userid);
+	header('Location: http://192.168.0.3/SW4/snips.php?tempId='. $userid);
 	mysqli_close($link);
 ?>

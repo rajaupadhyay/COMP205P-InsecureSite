@@ -1,4 +1,15 @@
-
+<?php
+	include 'constants.php';
+	session_start();
+	if(isset($_COOKIE['remember'])){
+		$_SESSION["loggedOn"] = true;
+		$sql = "SELECT ID, Admin, snippetAccess FROM users WHERE ID = '". $_COOKIE["remember"] . "';";
+		$result = mysqli_fetch_assoc(mysqli_query($link, $sql));
+		$_SESSION["id"] = $result["ID"];
+		$_SESSION["admin"] = $result["Admin"];
+		$_SESSION["snippet"] = $result["snippetAccess"];
+	}
+?>
 <html>
 	<head>
 		<title>COMP205P</title>
@@ -23,9 +34,11 @@
 							<ul>
 							<li class="menuLogin"></li>
 							<?php
-								session_start();
+								if(isset($_SESSION["admin"]) && $_SESSION["admin"] == 1){
+									echo "<li class='menuLogin'><a href='admin.php'><font size='1'>Admin</font></a></li>";
+								}
 								if(isset($_SESSION["loggedOn"])){
-									echo "<a href='snips.php?tempId=". $_SESSION["id"] ."'><li class='menuLogin'>Profile</li></a>";
+									echo "<li class='menuLogin'><a href='snips.php?tempId=". $_SESSION["id"] ."'><font size='1'>Profile</font></a></li>";
 									echo "<li id='li7' class='menuLogin'>Sign Out</li>";
 								}
 								else{
@@ -51,7 +64,7 @@
       							<input type="password" placeholder="Enter Password" id="logPassword" name="logPassword">
 
       							<input class="logbutton" type="submit" id="submit1" name="submit1" value="Login">
-      							<input type="checkbox" name="remember" value="yeah" checked> Remember me
+      							<input type="checkbox" name="remember" id="remember" value="yeah" checked> Remember me
     						</div>
 
     						<div class="container" style="background-color:#f1f1f1">
@@ -112,27 +125,47 @@
 				<!-- Main -->
 					<div id="main">
 					<?php
-						include 'constants.php';
 						$sql = "SELECT * FROM users;";
 						if($result = mysqli_query($link,$sql)){
 								while($val = mysqli_fetch_assoc($result)){
 									$temp = "SELECT MAX(ID) id FROM snippets WHERE userID = ". $val['ID'];
 									$maxid = mysqli_fetch_assoc(mysqli_query($link,$temp))['id'];
+									$temp = "SELECT URL, color, imageURL FROM users where ID = ". $val['ID'];	
+									$result1 = mysqli_fetch_assoc(mysqli_query($link,$temp));
+									$url = $result1['URL'];
+									$col = $result1['color'];
+									$image = $result1['imageURL'];
 									if(isset($maxid)){
-										$temp = "SELECT Text FROM snippets WHERE ID = ". $maxid;
-										$text = mysqli_fetch_assoc(mysqli_query($link,$temp))['Text'];
-										$temp = "SELECT URL FROM users where ID = ". $val['ID'];	
-										$url = mysqli_fetch_assoc(mysqli_query($link,$temp))['URL'];
+										$temp = "SELECT * FROM snippets WHERE ID = ". $maxid;
+										$result2 = mysqli_fetch_assoc(mysqli_query($link,$temp));
+										$text = $result2['Text'];
+										$date = $result2['Date'];
+										echo '<article class="post">
+										<header>
+											<div class="title" style="display:inline;">
+												<img style="display:inline;" src="'. $image .'" width="30px">
+												<h2 style="color:'. $col .';display:inline;margin-left:20px;"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
+												<br>
+												<p><a href="'. $url .'">My Site</a></p>
+											</div>
+										</header>
+
+										<h2>'. $text .'</h2>
+										<p><i>@ '. $date  .'</i></p>
+
+										</article>';
+									}
+									else{
 										echo '<article class="post">
 										<header>
 											<div class="title">
-												<h2><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
+												<h2 style="color:'. $col .'"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
 												<p><a href="'. $url .'">My Site</a></p>
 											</div>
 
 										</header>
 
-										<p>'. $text .'</p>
+										<p></p>
 
 										</article>';
 									}

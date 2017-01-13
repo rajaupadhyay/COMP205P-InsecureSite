@@ -8,9 +8,6 @@
 
 	$sql = "INSERT INTO users (Username, Email, Password) VALUES ('". $username . "', '". $email ."', '". $password ."');";
 	$result = mysqli_query($link,$sql);
-	if(!$result){
-		die("Could not perform the query: " . mysql_error());
-	}
-	header('Location: http://localhost/SW4/index.php');
+	header('Location: http://192.168.0.3/SW4/index.php');
 	mysqli_close($link);
 ?>

@@ -2,6 +2,7 @@
 	include 'constants.php';
 	session_start();
 ?>
+
 <html>
 	<head>
 		<title>COMP205P</title>
@@ -45,7 +46,6 @@
 							</ul>
 						</nav>
 					</header>
-
 					<div id="id01" class="modal">
 						<form id="logForm" class="modal-content animate" action="login.php" method="GET">
     						<div class="imgcontainer">
@@ -212,70 +212,41 @@
                     </div>
                 </form>
             </div>
-            <?php
-            	$sql = "SELECT Username, color, imageURL, URL FROM users where ID=". $_GET["tempId"];
-            	$result = mysqli_fetch_assoc(mysqli_query($link,$sql));
-            	$name = $result["Username"];
-            	$col = $result["color"];
-            	$image = $result["imageURL"];
-            	$url = $result["URL"];
-            	echo '<div style="margin-left:20px;">';
-            	echo '<img src="'. $image .'" alt="User Image" width = "100px">';
-            	echo '<h2 style="color:'. $col .'">'. $name .'</h2>';
-            	echo '<a href="'. $url .'">My Site</a>';
-            	echo '<br><br>';
-            	if(isset($_SESSION["loggedOn"]) && $_GET["tempId"] == $_SESSION["id"]){
-					$sql = "SELECT privateSnippet FROM users WHERE ID = ". $_GET["tempId"] .";";
-					$ps = mysqli_fetch_assoc(mysqli_query($link,$sql))["privateSnippet"];
-					echo '<h5>Private Snippet:</h5>';
-					echo '<p>'. $ps .'</p>';
-				}
-				echo '</div>';
-            ?>
-            <div class="content table-responsive table-full-width">
-                <table class="table table-hover table-striped my-table" style="text-align: center">
-                    <thead>
-                        <th><center>ID</center></th>
 
-                        <th><center>Snippet</center></th>
 
-                        <th><center>Date Created</center></th>
 
-                        <th><center>Edit/Delete</center></th>
 
-                    </thead>
-                    <tbody>
-                    	<?php
-							define('DB_TABLE', 'snippets');
-							$sql = "SELECT * FROM ". DB_TABLE ." WHERE userID = ". $_GET["tempId"] .";";
-							if($result = mysqli_query($link,$sql)){
-								while($val = mysqli_fetch_assoc($result)){
-								echo "<tr>";
-								echo "<td>". $val["ID"] ."</td>";
-								echo "<td id = ". $val["ID"] .">". $val["Text"] ."</td>";
-								echo "<td>". $val["Date"] ."</td>";
-								if(isset($_SESSION["loggedOn"])){
-									echo '<td class="td-actions text-right">
-	                                		<button type="button" id="edits" rel="tooltip" title="Edit Citation" class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#id08" data-id="'. $val["ID"] .'">
-	                                        <i class="fa fa-edit"></i>
-	                                    </button>
-	                                    <form action="deleteSnippet.php" method="GET" style="display: inline-block;">
-		                                    <input type="hidden" id="snipsId" name="snipsId" value="'. $val["ID"].'">
-		                                    <input type="hidden" id="userId" name="userId" value="'. $_SESSION["id"].'">
-		                                    <button type="submit" id="rowDelete" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-		                                        <i class="fa fa-times"></i>
-		                                    </button>
-	                                    </form>
-	                                	</td>';
-	                                }
-								}
-							}
-                    	?>
-                    </tbody>
-                </table>
+				<!-- Main -->
+					<div id="main">
 
-            </div>
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2>UPLOAD SUCCESSFUL</h2>
+										<?php
+											echo '<p><a href="'. $_GET["link"] .'" target="_blank">Click here to see your upload</a></p>'
+										?>
+									</div>
 
+								</header>
+
+							</article>
+
+					</div>
+
+
+
+
+						<!-- About -->
+
+
+						<!-- Footer -->
+
+
+					</section>
+
+			</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -285,12 +256,8 @@
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
 
-            <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-            <script src="assets/js/my-style.js"></script>
-
-            <?php
-				$sql = "SELECT URL, imageURL FROM users where ID = ". $_GET["tempId"] .";";
+			<?php
+				$sql = "SELECT URL, imageURL FROM users where ID = ". $_SESSION["id"] .";";
 				$result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 				$url = $result['URL'];
 				$pp = $result['imageURL'];
@@ -298,18 +265,6 @@
 				document.getElementById("profilePic").setAttribute("src","'. $pp .'");
 				</script>';
 			?>
-
-            <script>
-            	 $(document).on("click", "#edits", function (e) {
-				    e.preventDefault();
-				    var _self = $(this);	
-				    var Id = _self.data('id');
-				    var text = document.getElementById(Id).innerHTML;
-				    document.getElementById("snippet1").innerHTML = text;
-				    document.getElementById("snippetId").setAttribute("value",Id);
-				});
-            </script>
-
 
 			<script>
 			$(function() {
@@ -477,7 +432,6 @@
 				</script>";
 			}
 			?>
-
 
 	</body>
 </html>
