@@ -1,1 +1,1 @@
-(C) VARUN MATHUR 2017
+To run this on your machine have your local server running go to constants.php and fill in your information in the four constants defined above after extracting the .mysql provided to your database.
