@@ -167,7 +167,7 @@
 
 										</header>
 
-										<h2>'. $text .'</h2>
+										<h2></h2>
 										<p><i>@ '. $date  .'</i></p>
 
 										</article>';
