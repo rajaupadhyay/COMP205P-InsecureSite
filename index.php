@@ -168,7 +168,7 @@
 										</header>
 
 										<h2></h2>
-										<p><i>@ '. $date  .'</i></p>
+										<p><i></i></p>
 
 										</article>';
 									}
