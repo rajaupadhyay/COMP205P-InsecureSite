@@ -2,9 +2,9 @@
 	include 'constants.php';
 	define('DB_TABLE', 'users');
 
-	$username = $_GET['logUsername'];
+	$email = $_GET['logEmail'];
 	$password = $_GET['logPassword'];
-	$sql = "SELECT * FROM " . DB_TABLE . " where Username = '" . $username . "' AND Password = '" . $password . "';";
+	$sql = "SELECT * FROM " . DB_TABLE . " where Email = '" . $email . "' AND Password = '" . $password . "';";
 	$result = mysqli_fetch_assoc(mysqli_query($link,$sql));
 	if(!$result){
 		header('Location: http://192.168.0.3/SW4/index.php');
@@ -15,7 +15,7 @@
 	}
 	session_start();
 	$_SESSION["loggedOn"] = true;
-	$sql = "SELECT ID, Admin, snippetAccess FROM users WHERE Username = '". $username . "';";
+	$sql = "SELECT ID, Admin, snippetAccess FROM users WHERE Email = '". $email . "';";
 	$result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 	$_SESSION["id"] = $result["ID"];
 	$_SESSION["admin"] = $result["Admin"];

@@ -35,14 +35,16 @@
 							<li class="menuLogin"></li>
 							<?php
 								if(isset($_SESSION["admin"]) && $_SESSION["admin"] == 1){
-									echo "<li class='menuLogin'><a href='admin.php'><font size='1'>Admin</font></a></li>";
+									echo "<li class='menuLogin'><a href='admin.php'><font size='2'>Admin</font></a></li>";
 								}
 								if(isset($_SESSION["loggedOn"])){
-									echo "<li class='menuLogin'><a href='snips.php?tempId=". $_SESSION["id"] ."'><font size='1'>Profile</font></a></li>";
-									echo "<li id='li7' class='menuLogin'>Sign Out</li>";
+									$temp = "SELECT Username FROM users where ID = ". $_SESSION["id"];	
+									$user = mysqli_fetch_assoc(mysqli_query($link,$temp))['Username'];
+									echo "<li class='menuLogin'><a href='snips.php?tempId=". $_SESSION["id"] ."'><font size='2'>". $user ."</font></a></li>";
+									echo "<li id='li7' class='menuLogin'>Logout</li>";
 								}
 								else{
-									echo '<li id="li1" class="menuLogin">login</li>';
+									echo '<li id="li1" class="menuLogin">Login</li>';
 									echo '<li id="li2" class="menuLogin">Sign Up</li>';
 								}
 							?>
@@ -58,8 +60,8 @@
     						</div>
 
     						<div class="logcontainer">
-      							<label><b>Username</b></label>
-      							<input type="text" placeholder="Enter Username" id="logUsername" name="logUsername">
+      							<label><b>Email</b></label>
+      							<input type="text" placeholder="Enter Email" id="logEmail" name="logEmail">
       							<label><b>Password</b></label>
       							<input type="password" placeholder="Enter Password" id="logPassword" name="logPassword">
 
@@ -124,6 +126,7 @@
 
 				<!-- Main -->
 					<div id="main">
+					<h1>Home</h1>
 					<?php
 						$sql = "SELECT * FROM users;";
 						if($result = mysqli_query($link,$sql)){
@@ -146,7 +149,7 @@
 												<img style="display:inline;" src="'. $image .'" width="30px">
 												<h2 style="color:'. $col .';display:inline;margin-left:20px;"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
 												<br>
-												<p><a href="'. $url .'">My Site</a></p>
+												<p><a href="'. $url .'">'. $val["Username"] .'\'s Site</a></p>
 											</div>
 										</header>
 
@@ -162,7 +165,7 @@
 												<img style="display:inline;" src="'. $image .'" width="30px">
 												<h2 style="color:'. $col .';display:inline;margin-left:20px;"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
 												<br>
-												<p><a href="'. $url .'">My Site</a></p>
+												<p><a href="'. $url .'">'. $val["Username"] .'\'s Site</a></p>
 											</div>
 
 										</header>

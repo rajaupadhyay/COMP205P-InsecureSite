@@ -5,7 +5,7 @@
 	$id = $_GET['snipsId'];
 	$userid = $_GET['userId'];
 
-	$sql = "DELETE FROM ". DB_TABLE ." WHERE ID =". $id .";";
+	$sql = "DELETE FROM ". DB_TABLE ." WHERE ID =". $id ." AND userId = ". $userid .";";
 	$result = mysqli_query($link,$sql);
 	if(!$result){
 		die("Could not perform the query: " . mysql_error());

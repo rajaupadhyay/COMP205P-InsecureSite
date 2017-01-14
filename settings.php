@@ -2,10 +2,16 @@
 	include 'constants.php';
 	session_start();
 	$id = $_GET["newUsername"];
-	$sql = "SELECT Username FROM users WHERE ID = '". $_SESSION["id"] . "'";
+	if(isset($_GET["userId1"]) && $_GET["userId1"]!="")
+		$sql = "SELECT Username FROM users WHERE ID = '". $_GET["userId1"] . "'";
+	else
+		$sql = "SELECT Username FROM users WHERE ID = '". $_SESSION["id"] . "'";
 	$result = mysqli_fetch_assoc(mysqli_query($link,$sql))["Username"];
 	if($id != $result){
-		$sql = "UPDATE users SET Username ='". $id ."' WHERE ID = '". $_SESSION["id"] . "'";
+		if(isset($_GET["userId1"]) && $_GET["userId1"]!="")
+			$sql = "UPDATE users SET Username ='". $id ."' WHERE ID = '". $_GET["userId1"] . "'";
+		else
+			$sql = "UPDATE users SET Username ='". $id ."' WHERE ID = '". $_SESSION["id"] . "'";
 		mysqli_query($link,$sql);
 	}
 	if($_GET['oldPassword'] != "" && $_GET['newPassword'] != "" && $_GET['confirmNewPassword'] != ""){
@@ -50,6 +56,9 @@
 			}
 		}
 	}
-	header('Location: http://192.168.0.3/SW4/snips.php?tempId='.$_SESSION["id"]);
+	if(isset($_GET["userId1"]) && $_GET["userId1"]!="")
+		header('Location: http://192.168.0.3/SW4/snips.php?tempId='. $_GET["userId1"]);
+	else
+		header('Location: http://192.168.0.3/SW4/snips.php?tempId='. $_SESSION["id"]);
 	mysqli_close($link);
 ?>

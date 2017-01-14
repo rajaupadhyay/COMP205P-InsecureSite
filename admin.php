@@ -27,13 +27,11 @@
 							<ul>
 							<li class="menuLogin"></li>
                                 <?php
-									if(isset($_SESSION["loggedOn"])){
-										if(isset($_SESSION["snippet"]) && $_SESSION["snippet"] == 1)
-		                                	echo '<li id="li6" class="menuLogin">New Snippet</li>';
-				                        echo        '<li class="menuLogin"><a id="site" href=""><font size="1">My Site</font></a></li>
-				                                <li id="li3" class="menuLogin">Settings</li>
-												<li id="li4" class="menuLogin">Upload</li>
-												<li id="li7" class="menuLogin">Sign Out</li>';
+                                	if(isset($_SESSION["loggedOn"])){
+                                		$temp = "SELECT Username FROM users where ID = ". $_SESSION['id'];	
+										$user = mysqli_fetch_assoc(mysqli_query($link,$temp))['Username'];
+										echo "<li class='menuLogin'><a href='snips.php?tempId=". $_SESSION["id"] ."'><font size='2'>". $user ."</font></a></li>";
+										echo "<li id='li7' class='menuLogin'>Logout</li>";
 									}
 									else{
 										echo '<li id="li1" class="menuLogin">login</li>';
@@ -53,8 +51,8 @@
     						</div>
 
     						<div class="logcontainer">
-      							<label><b>Username</b></label>
-      							<input type="text" placeholder="Enter Username" id="logUsername" name="logUsername">
+      							<label><b>Email</b></label>
+      							<input type="text" placeholder="Enter Email" id="logEmail" name="logEmail">
       							<label><b>Password</b></label>
       							<input type="password" placeholder="Enter Password" id="logPassword" name="logPassword">
 

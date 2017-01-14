@@ -11,6 +11,6 @@
 	if(!$result){
 		die("Could not perform the query: " . mysql_error());
 	}
-	header('Location: http://192.168.0.3/SW4/snips.php?tempId='. $_SESSION["id"]);
+	header('Location: http://192.168.0.3/SW4/snips.php?tempId='. $_GET["userID"]);
 	mysqli_close($link);
 ?>
