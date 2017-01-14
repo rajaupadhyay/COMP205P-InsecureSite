@@ -1,8 +1,8 @@
 <?php 
-	define('DB_NAME', 'vulnerable site');
-	define('DB_USER', 'root');
-	define('DB_PASSWORD', 'sidharth12468');
-	define('DB_HOST', 'localhost');
+	define('DB_NAME', '');
+	define('DB_USER', '');
+	define('DB_PASSWORD', '');
+	define('DB_HOST', '');
 
 	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
 	if(!$link){
