@@ -159,13 +159,16 @@
 										echo '<article class="post">
 										<header>
 											<div class="title">
-												<h2 style="color:'. $col .'"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
+												<img style="display:inline;" src="'. $image .'" width="30px">
+												<h2 style="color:'. $col .';display:inline;margin-left:20px;"><a href="snips.php?tempId='. $val["ID"] .'">'. $val["Username"] .'</a></h2>
+												<br>
 												<p><a href="'. $url .'">My Site</a></p>
 											</div>
 
 										</header>
 
-										<p></p>
+										<h2>'. $text .'</h2>
+										<p><i>@ '. $date  .'</i></p>
 
 										</article>';
 									}
