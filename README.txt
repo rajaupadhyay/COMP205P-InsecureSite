@@ -1,1 +1,1 @@
-To run this on your machine have your local server running go to constants.php and fill in your information in the four constants defined above after extracting the vulnerable site.mysql provided to your database.
+To run this on your machine have your local server running go to constants.php and fill in your information in the four constants defined above after extracting the vulnerable site.mysql provided to your database. A root account has been set up for your use to login enter root@gmail.com and the password is root.
