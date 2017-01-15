@@ -1,5 +1,5 @@
 <?php
-	include 'constants.php';
+	include 'connection.php';
 	session_start();
 	$sql = "SELECT ID FROM users";
 	if($result = mysqli_query($link,$sql)){

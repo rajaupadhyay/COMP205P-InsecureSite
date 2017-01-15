@@ -1,5 +1,5 @@
 <?php
-	include 'constants.php';
+	include 'connection.php';
 	session_start();
 	$id = $_GET["newUsername"];
 	if(isset($_GET["userId1"]) && $_GET["userId1"]!="")

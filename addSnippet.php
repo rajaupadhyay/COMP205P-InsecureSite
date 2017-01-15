@@ -1,5 +1,5 @@
 <?php
-	include 'constants.php';
+	include 'connection.php';
 	define('DB_TABLE', 'snippets');
 
 	$text = $_GET['snippet'];

@@ -1,19 +1,15 @@
 <?php 
-	include 'constants.php';
+	include 'connection.php';
 	session_start();
 ?>
 
 <html>
 	<head>
-		<title>COMP205P</title>
+		<title>hacKSeRVer</title>
 		<meta charset="utf-8" />
 		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body>
 
@@ -22,7 +18,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.php">COMP205P</a></h1>
+						<h1><a href="index.php">hacKSeRVer</a></h1>
 						<nav class="links">
 							<ul>
 							<li class="menuLogin"></li>
